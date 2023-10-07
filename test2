@@ -1,1 +1,278 @@
+import mido
+from mido import MidiFile, MidiTrack, Message
+import os
+import datetime
+import IPython
+import IPython.display
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import tensorflow as tf
+import xarray as xr
+import plotly 
+import plotly.graph_objs as go
+import scipy.io as sio
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.pyplot as plt
+import numpy as np
+from mpl_toolkits.mplot3d import axes3d
+import matplotlib.pyplot as plt
+from matplotlib import cm
+from pathlib import Path
+import numpy as np
+import matplotlib.pyplot as plt
+import xarray as xr
+from midiutil import MIDIFile
+
+
+#import cartopy.crs as ccrs
+#import cartopy.feature as cfeature
+filepath = Path(r'C:\\Users\user\Downloads\f1ma')
+filelist = list(filepath.glob('*.nc'))
+print(filelist)
+#proton_speed=(filelist.variables['proton_speed'][:])
+#proton_density=(filelist.variables['proton_density'][:])
+#proton_temperature=(filelist.variables['proton_temperature'][:])
+
+for i in range(4):
+    p=('f'+str(i))#+'='+'xr.open_dataset'+'('+('filelist'+'['+str(i)+']')+')'
+    u='proton_temperature'+str(i)+'=('+str(p)+".variables['proton_temperature'][:])"#('f'+str(i))+'='+'xr.open_dataset'+'('+('filelist'+'['+str(i)+']')+')'
+    print(u)
+    print(p)
+u
+for i in range(4):
+    p=('f'+str(i))#+'='+'xr.open_dataset'+'('+('filelist'+'['+str(i)+']')+')'
+    q='proton_temperature'+str(i)+','#('f'+str(i))+'='+'xr.open_dataset'+'('+('filelist'+'['+str(i)+']')+')'
+    print(q)
+f1 = xr.open_dataset(filelist[1])
+f2 = xr.open_dataset(filelist[2])
+f3=xr.open_dataset(filelist[3])
+f4=xr.open_dataset(filelist[4])
+
+#for i in range(4):
+ #   u='proton_temperature=('+str(p)+".variables['proton_temperature'][:])"#('f'+str(i))+'='+'xr.open_dataset'+'('+('filelist'+'['+str(i)+']')+')'
+  #  print(u)
+
+p=f1
+print(p)
+proton_speed=(p.variables['proton_speed'][:])
+proton_density=(p.variables['proton_density'][:])
+proton_temperature=(p.variables['proton_temperature'][:])
+
+proton_speed1=(f2.variables['proton_speed'][:])
+proton_density1=(f2.variables['proton_density'][:])
+proton_temperature1=(f2.variables['proton_temperature'][:])
+plt.plot(proton_temperature1)
+
+#proton_temperature0=(f0.variables['proton_temperature'][:])
+#f0
+proton_temperature1=(f1.variables['proton_temperature'][:])
+f1
+proton_temperature2=(f2.variables['proton_temperature'][:])
+f2
+proton_temperature3=(f3.variables['proton_temperature'][:])
+f3
+
+proton_temperature=(p.variables['proton_temperature'][:])
+time=(p.variables['time'][:])
+train_df = pd.DataFrame([
+                [ proton_temperature],#['proton_temperature', proton_temperature], 
+                [ time],#['time', time],
+                #index==[0, 1], 
+               # columns==['proton_temperature', 'time']
+               ])
+print(train_df)
+e=[q]
+
+x=np.asarray(train_df)
+print(x)
+train_dataset = tf.stack([proton_temperature])
+print(train_dataset)
+
+plt.plot(proton_temperature1)
+print(e)
+print(proton_temperature1)
+######
+
+teams={"proton_temperature","time"}
+df=pd.DataFrame(teams)
+plt.hist2d(proton_temperature, time, bins=(50, 50), vmax=25)
+plt.colorbar()
+plt.xlabel('proton_temperature [degree K]')
+plt.ylabel('time[s]')
+print(df)
+######
+
+data = [proton_temperature1]
+# Create a MIDI file with one track
+midi = MIDIFile(1)
+midi.addTempo(0, 0, 120)  # Tempo in BPM (beats per minute)
+# Add notes to the MIDI file based on the data
+for i, pitch in enumerate(data):
+    midi.addNote(0, 0, pitch, i, 1, 100)  # Duration is in beats (quarter notes)
+# Save the MIDI file
+with open("output.mid", "wb") as midi_file:
+    midi.writeFile(midi_file)
+
+#########
+#test1  #
+#########
+
+from pathlib import Path
+import numpy as np
+import matplotlib.pyplot as plt
+import xarray as xr
+#import cartopy.crs as ccrs
+#import cartopy.feature as cfeature
+filepath = Path(r'C:\\Users\user\Downloads\f1ma')
+filelist = list(filepath.glob('*.nc'))
+print(filelist)
+#proton_speed=(filelist.variables['proton_speed'][:])
+#proton_density=(filelist.variables['proton_density'][:])
+#proton_temperature=(filelist.variables['proton_temperature'][:])
+
+for i in range(4):
+    p=('f'+str(i))#+'='+'xr.open_dataset'+'('+('filelist'+'['+str(i)+']')+')'
+    u='proton_temperature'+str(i)+'=('+str(p)+".variables['proton_temperature'][:])"#('f'+str(i))+'='+'xr.open_dataset'+'('+('filelist'+'['+str(i)+']')+')'
+    print(u)
+    print(p)
+u
+for i in range(4):
+    p=('f'+str(i))#+'='+'xr.open_dataset'+'('+('filelist'+'['+str(i)+']')+')'
+    q='proton_temperature'+str(i)+','#('f'+str(i))+'='+'xr.open_dataset'+'('+('filelist'+'['+str(i)+']')+')'
+    print(q)
+f1 = xr.open_dataset(filelist[1])
+f2 = xr.open_dataset(filelist[2])
+f3=xr.open_dataset(filelist[3])
+f4=xr.open_dataset(filelist[4])
+
+#for i in range(4):
+ #   u='proton_temperature=('+str(p)+".variables['proton_temperature'][:])"#('f'+str(i))+'='+'xr.open_dataset'+'('+('filelist'+'['+str(i)+']')+')'
+  #  print(u)
+
+p=f1
+print(p)
+proton_speed=(p.variables['proton_speed'][:])
+proton_density=(p.variables['proton_density'][:])
+proton_temperature=(p.variables['proton_temperature'][:])
+
+proton_speed1=(f2.variables['proton_speed'][:])
+proton_density1=(f2.variables['proton_density'][:])
+proton_temperature1=(f2.variables['proton_temperature'][:])
+plt.plot(proton_temperature1)
+
+#proton_temperature0=(f0.variables['proton_temperature'][:])
+#f0
+proton_temperature1=(f1.variables['proton_temperature'][:])
+f1
+proton_temperature2=(f2.variables['proton_temperature'][:])
+f2
+proton_temperature3=(f3.variables['proton_temperature'][:])
+f3
+
+proton_temperature=(p.variables['proton_temperature'][:])
+time=(p.variables['time'][:])
+train_df = pd.DataFrame([
+                [ proton_temperature],#['proton_temperature', proton_temperature], 
+                [ time],#['time', time],
+                #index==[0, 1], 
+               # columns==['proton_temperature', 'time']
+               ])
+print(train_df)
+e=[q]
+x=np.asarray(train_df)
+print(x)
+train_dataset = tf.stack([proton_temperature])
+print(train_dataset)
+
+plt.plot(proton_temperature1)
+print(e)
+
+
+import tensorflow as tf
+import numpy as np
+from tensorflow.keras.datasets import mnist
+x_train=train_dataset
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+
+def get_batch(x_data, y_data, batch_size):
+    idxs = np.random.randint(0, len(y_data), batch_size)
+    return x_data[idxs,:,:], y_data[idxs]
+
+epochs = 10
+batch_size = 100
+x_train = x_train / 255.0 # scaler to 0~1
+x_test = x_test / 255.0 # scaler to 0-1
+# convert x_test to tensor to pass through model (train data will be converted to
+# tensors on the fly)
+x_test = tf.Variable(x_test)
+
+# initilize and set weights and bias
+# input layer weights and bias: 784 is input dimensions, 300 is hidden layer's neruon number.
+W1 = tf.Variable(tf.random.normal([784,300], stddev=0.03), name='W1')
+b1 = tf.Variable(tf.random.normal([300]), name='b1')
+# hidden layer weights and bias to the output layer
+W2 = tf.Variable(tf.random.normal([300,10], stddev=0.03), name='W2')
+b2 = tf.Variable(tf.random.normal([10]), name='b2')
+
+# build model
+def nn_model(x_input, W1, b1 ,W2, b2):
+    x_input = tf.reshape(x_input, shape=(x_input.shape[0], -1))
+    # y = (Wx + b) * activation function
+    x = tf.add(tf.matmul(tf.cast(x_input, tf.float32), W1), b1)
+    x = tf.nn.relu(x)
+    outputs = tf.add(tf.matmul(x, W2), b2)
+    # outputs = tf.nn.softmax(outputs)
+    return outputs
+
+# define loss function
+def loss_fn(outputs, labels):
+  # The arguments to softmax_cross_entropy_with_logits are labels and logits.
+  # The usage of this function in the main training loop will be demonstrated shortly.
+  # The labels argument is supplied from the one-hot y values that are fed into loss_fn during the training process.
+  # tf.reduct_mean will calculate the mean of all values in tensor.
+    cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=labels, logits=outputs))
+    return cross_entropy
+
+# define optimizer
+optimizer = tf.keras.optimizers.Adam()
+
+# start Training
+total_batch = int(len(y_train) / batch_size)
+for epoch in range(epochs):
+    avg_loss = 0
+    # 開始從第一個 epoch 迭代，總共會跑600個 epochs
+    for i in range(total_batch):
+        # 一個 batch 總共會訓練100筆 data
+        batch_x, batch_y = get_batch(x_train, y_train, batch_size=batch_size)
+        batch_x = tf.Variable(batch_x)
+        # batch_y.shape = (100,)
+        batch_y = tf.Variable(batch_y)
+        # after one-hot batch_y.shape = (100, 10)
+        batch_y = tf.one_hot(batch_y, 10)
+        with tf.GradientTape() as tape:
+            # pred.shape = (100, 10)
+            pred = nn_model(batch_x, W1, b1, W2, b2)
+            # loss is a scalar, arguments needs to have same dimension.
+            loss = loss_fn(outputs=pred, labels=batch_y)
+        # gradients = calculate dL/dw and dL/db （對 loss 和參數做微分）
+        gradients = tape.gradient(loss, [W1, b1, W2, b2])
+        # 更新參數（update weights and bias through backpropagation）
+        optimizer.apply_gradients(zip(gradients, [W1, b1, W2, b2]))
+        avg_loss += loss / total_batch
+    # validate training data
+    train_pred = nn_model(x_train, W1, b1, W2, b2)
+    train_max_idxs = tf.argmax(train_pred, axis=1)
+    acc = np.sum(train_max_idxs.numpy()==y_train) / len(y_train)
+    # validate testing data
+    test_pred = nn_model(x_test, W1, b1, W2, b2)
+    y_test_one_hot = tf.one_hot(y_test, 10)
+    test_loss = loss_fn(outputs=test_pred, labels=y_test_one_hot)
+    max_idxs = tf.argmax(test_pred, axis=1)
+    test_acc = np.sum(max_idxs.numpy()==y_test) / len(y_test)
+    print(f"Epoch: {epoch+1}, loss={avg_loss:.3f}, , acc={acc:.3f}, val_loss={test_loss:.3f}, val_acc:{test_acc*100:.3f}")
+print("Training complete!")
 
